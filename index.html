@@ -32,8 +32,8 @@ if (document.getElementById("input").value.replace(/\\/gm, "backslash")!== local
   localStorage.setItem("save", document.getElementById("input").value);
   document.getElementById("output").innerHTML = localStorage.getItem("save");
 }
-  MathJax.Hub.Queue(["Typeset",MathJax.Hub]);}
-  document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;
+  MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+  document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;}
 function save(){
  localStorage.setItem(document.getElementById('filename').value.replace(/\\/gm, "backslash").replace(/"/gm, "double_quote").replace(/'/gm, "single_quote"), input.value.replace(/\\/gm, "backslash").replace(/(\r\n|\n|\r)/gm, "").replace(/"/gm, "double_quote").replace(/'/gm, "single_quote"));
 document.getElementById('filename').value='';
@@ -70,14 +70,14 @@ float:left;
   color: white;
   width:15%;
   height:95.5%;
-  overflow: scroll;}
+  overflow: auto;}
 .output {
   background-color:#1A1A33;
   float:right;
   width:84%;
   height:100%;
   text-align:left;
-  overflow: scroll;}
+  overflow: auto;}
 .filename {
 background-color:white;
 width:7%;
