@@ -42,7 +42,112 @@ Having trouble with Pages? Check out our [documentation](https://docs.github.com
 
 <!-- mathjax config -->
 <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [ ['$','$'], ["\\(","\\)"] ],processEscapes: true}});<!-- Set title and colors -->
+<title>Mathjax Editor</title>
+<body style="background-color: black">
+<body text="white" link="lightblue" vlink="white" alink="grey">
+
+<!-- mathjax config -->
+<script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [ ['$','$'], ["\\(","\\)"] ],processEscapes: true}});
+</script>
+<script
+  type="text/javascript"
+  charset="utf-8"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- input/output area and buttons -->
+<div class="output" id="output"></div>
+<button class="Loadbutton" onclick="file()">Load</button>
+<button id="Save as" class="Save_as" onclick="save()">Save as</button>
+
+<input class="filename" id="filename" onkeyup="check()">
+<textarea class="input" id="input" onkeyup="main()">> Type something to start.</textarea>
+
+<!-- Editor fuctions -->
+<script>
+document.getElementById('input').value=localStorage.getItem("save");
+document.getElementById("output").innerHTML = localStorage.getItem("save");
+document.getElementById("Save as").disabled = true;
+function main() {
+if (document.getElementById("input").value.replace(/\\/gi, "backslash")!== localStorage.getItem("save").replace(/\\/gi, "backslash")){
+  localStorage.setItem("save", document.getElementById("input").value);
+  document.getElementById("output").innerHTML = localStorage.getItem("save");}
+  MathJax.Hub.Queue(["Typeset",MathJax.Hub]);}
+function save(){
+ localStorage.setItem(document.getElementById('filename').value.replace(/\\/gi, "backslash"), input.value.replace(/\\/gi, "backslash").replace(/(\r\n|\n|\r)/gm, "").replace(/"/gi, "double_quote").replace(/'/gi, "single_quote"));
+document.getElementById('filename').value='';
+document.getElementById("Save as").disabled = true;
+file();}
+function load(x) {
+  document.getElementById('input').value=x.replace(/backslash/gi, "\\").replace(/double_quote/gi, '"').replace(/single_quote/gi, "'");
+  document.getElementById("output").innerHTML = x.replace(/backslash/gi, "\\").replace(/double_quote/gi, '"').replace(/single_quote/gi, "'");
+  MathJax.Hub.Queue(["Typeset",MathJax.Hub]);}
+function file() {
+  var l, i;
+  document.getElementById("output").innerHTML = "";
+  for (i = 0; i < localStorage.length; i++) {
+  if (localStorage.key(i)!=='save'){x = '<button class="filebutton" onclick="load('+"'"+localStorage.getItem(localStorage.key(i))+"'"+')">'+localStorage.key(i).replace(/backslash/gi, "\\")+'</button><button class="delbutton" onclick="del('+"'"+localStorage.key(i)+"'"+')">×</button>';
+  document.getElementById("output").innerHTML +=x + "<br>";}
+  MathJax.Hub.Queue(["Typeset",MathJax.Hub]);}}
+function del(x){
+localStorage.removeItem(x);
+file();}
+function check(){
+if (document.getElementById('filename').value !== ''){
+document.getElementById("Save as").disabled = false;}
+else{document.getElementById("Save as").disabled = true;}}
+</script>
+
+<!-- Editor style-->
+<style>
+body {
+  text-align: left;
+}
+.input {
+float:left;
+  background-color:black;
+  color: white;
+  width:15%;
+  height:95.5%;
+  overflow: scroll;}
+.output {
+  background-color:#1A1A33;
+  float:right;
+  width:84%;
+  height:100%;
+  text-align:left;
+  overflow: scroll;}
+.filename {
+background-color:white;
+width:7%;
+float:left;
+color: #1A1A33;}
+.Save_as{
+background-color:#1A1A33;
+width:8%;
+float:left;
+color: white;}
+.Loadbutton{
+background-color:#1A1A33;
+width:15%;
+float:bottom;
+color: white;}
+.filebutton {
+background-color:#1A1A33;
+width:30%;
+height:2%;
+float:left;
+color: white;}
+.delbutton {
+background-color:darkred;
+width:1.5%;
+height:2.5%;
+text-align:left;
+float:top;
+color: white;}
+
 </script>
 <script
   type="text/javascript"
