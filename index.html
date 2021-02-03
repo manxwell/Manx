@@ -26,13 +26,14 @@
 document.getElementById('input').value=localStorage.getItem("save");
 document.getElementById("output").innerHTML = localStorage.getItem("save");
 document.getElementById("Save as").disabled = true;
+if(localStorage.getItem("save") == null) {localStorage.setItem("save", '');}
 function main() {
 if (document.getElementById("input").value.replace(/\\/gm, "backslash")!== localStorage.getItem("save").replace(/\\/gm, "backslash")){
   localStorage.setItem("save", document.getElementById("input").value);
   document.getElementById("output").innerHTML = localStorage.getItem("save");}
   MathJax.Hub.Queue(["Typeset",MathJax.Hub]);}
 function save(){
- localStorage.setItem(document.getElementById('filename').value.replace(/\\/gm, "backslash"), input.value.replace(/\\/gm, "backslash").replace(/(\r\n|\n|\r)/gm, "").replace(/"/gm, "double_quote").replace(/'/gm, "single_quote"));
+ localStorage.setItem(document.getElementById('filename').value.replace(/\\/gm, "backslash").replace(/"/gm, "double_quote").replace(/'/gm, "single_quote"), input.value.replace(/\\/gm, "backslash").replace(/(\r\n|\n|\r)/gm, "").replace(/"/gm, "double_quote").replace(/'/gm, "single_quote"));
 document.getElementById('filename').value='';
 document.getElementById("Save as").disabled = true;
 file();}
@@ -44,7 +45,7 @@ function file() {
   var l, i;
   document.getElementById("output").innerHTML = "";
   for (i = 0; i < localStorage.length; i++) {
-  if (localStorage.key(i)!=='save'){x = '<button class="filebutton" onclick="load('+"'"+localStorage.getItem(localStorage.key(i))+"'"+')">'+localStorage.key(i).replace(/backslash/gm, "\\")+'</button><button class="delbutton" onclick="del('+"'"+localStorage.key(i)+"'"+')">×</button>';
+  if (localStorage.key(i)!=='save'){x = '<button class="filebutton" onclick="load('+"'"+localStorage.getItem(localStorage.key(i))+"'"+')">'+localStorage.key(i).replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'")+'</button><button class="delbutton" onclick="del('+"'"+localStorage.key(i)+"'"+')">×</button>';
   document.getElementById("output").innerHTML +=x + "<br>";}
   MathJax.Hub.Queue(["Typeset",MathJax.Hub]);}}
 function del(x){
