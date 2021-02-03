@@ -31,7 +31,8 @@
     function main() {
       if (document.getElementById("input").value.replace(/\\/gm, "backslash") !== localStorage.getItem("save").replace(/\\/gm, "backslash")) {
         localStorage.setItem("save", document.getElementById("input").value);
-        document.getElementById("output").innerHTML = localStorage.getItem("save");
+        document.getElementById("output").innerHTML = localStorage.getItem("save")+"<br><br>";
+        document.getElementById("output").scrollBy(0, 100);
       }
       MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
       document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;
