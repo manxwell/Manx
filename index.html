@@ -1,108 +1,142 @@
+<html>
 <!-- Set title and colors -->
 <title>Mathjax Editor</title>
-<body style="background-color: black">
-<body text="white" link="lightblue" vlink="white" alink="grey">
 
-<!-- mathjax config -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({tex2jax: {inlineMath: [ ['$','$'], ["\\(","\\)"] ],processEscapes: true}});
-</script>
-<script
-  type="text/javascript"
-  charset="utf-8"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
+<body style="background-color: black" text="white" link="lightblue" vlink="white" alink="grey">
 
-<!-- input/output area and buttons -->
-<div class="output" id="output"></div>
-<button class="Loadbutton" onclick="file()">Load</button>
-<button id="Save as" class="Save_as" onclick="save()">Save as</button>
+  <!-- mathjax config -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [ ['$','$'], ["\\(","\\)"] ],processEscapes: true}});
+  </script>
+  <script type="text/javascript" charset="utf-8" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
 
-<input class="filename" id="filename" onkeyup="check()">
-<textarea class="input" id="input" onkeyup="main()"></textarea>
+  <!-- input/output area and buttons -->
+  <div class="output" id="output"></div>
+  <button class="Loadbutton" onclick="file()">Load</button>
+  <button id="Save as" class="Save_as" onclick="save()">Save as</button>
 
-<!-- Editor fuctions -->
-<script>
-document.getElementById('input').value=localStorage.getItem("save");
-document.getElementById("output").innerHTML = localStorage.getItem("save");
-document.getElementById("Save as").disabled = true;
-if(localStorage.getItem("save") == null) {localStorage.setItem("save", '');}
-function main() {
-if (document.getElementById("input").value.replace(/\\/gm, "backslash")!== localStorage.getItem("save").replace(/\\/gm, "backslash")){
-  localStorage.setItem("save", document.getElementById("input").value);
-  document.getElementById("output").innerHTML = localStorage.getItem("save");
-}
-  MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-  document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;}
-function save(){
- localStorage.setItem(document.getElementById('filename').value.replace(/\\/gm, "backslash").replace(/"/gm, "double_quote").replace(/'/gm, "single_quote"), input.value.replace(/\\/gm, "backslash").replace(/(\r\n|\n|\r)/gm, "").replace(/"/gm, "double_quote").replace(/'/gm, "single_quote"));
-document.getElementById('filename').value='';
-document.getElementById("Save as").disabled = true;
-file();}
-function load(x) {
-  document.getElementById('input').value=x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
-  document.getElementById("output").innerHTML = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
-  MathJax.Hub.Queue(["Typeset",MathJax.Hub]);}
-function file() {
-  var l, i;
-  document.getElementById("output").innerHTML = "";
-  for (i = 0; i < localStorage.length; i++) {
-  if (localStorage.key(i)!=='save'){x = '<button class="filebutton" onclick="load('+"'"+localStorage.getItem(localStorage.key(i))+"'"+')">'+localStorage.key(i).replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'")+'</button><button class="delbutton" onclick="del('+"'"+localStorage.key(i)+"'"+')">×</button>';
-  document.getElementById("output").innerHTML +=x + "<br>";}
-  MathJax.Hub.Queue(["Typeset",MathJax.Hub]);}}
-function del(x){
-localStorage.removeItem(x);
-file();}
-function check(){
-if (document.getElementById('filename').value !== ''){
-document.getElementById("Save as").disabled = false;}
-else{document.getElementById("Save as").disabled = true;}}
-</script>
+  <input class="filename" id="filename" onkeyup="check()">
+  <textarea class="input" id="input" onkeyup="main()"></textarea>
 
-<!-- Editor style-->
-<style>
-body {
-  text-align: left;
-}
-.input {
-float:left;
-  background-color:black;
-  color: white;
-  width:15%;
-  height:95.5%;
-  overflow: auto;}
-.output {
-  background-color:#1A1A33;
-  float:right;
-  width:84%;
-  height:100%;
-  text-align:left;
-  overflow: auto;}
-.filename {
-background-color:white;
-width:7%;
-float:left;
-color: #1A1A33;}
-.Save_as{
-background-color:#1A1A33;
-width:8%;
-float:left;
-color: white;}
-.Loadbutton{
-background-color:#1A1A33;
-width:15%;
-float:bottom;
-color: white;}
-.filebutton {
-background-color:#1A1A33;
-width:30%;
-height:2%;
-float:left;
-color: white;}
-.delbutton {
-background-color:darkred;
-width:1.5%;
-height:2.5%;
-text-align:left;
-float:top;
-color: white;}
+  <!-- Editor fuctions -->
+  <script>
+    document.getElementById('input').value = localStorage.getItem("save");
+    document.getElementById("output").innerHTML = localStorage.getItem("save");
+    document.getElementById("Save as").disabled = true;
+    if (localStorage.getItem("save") == null) {
+      localStorage.setItem("save", '');
+    }
+
+    function main() {
+      if (document.getElementById("input").value.replace(/\\/gm, "backslash") !== localStorage.getItem("save").replace(/\\/gm, "backslash")) {
+        localStorage.setItem("save", document.getElementById("input").value);
+        document.getElementById("output").innerHTML = localStorage.getItem("save");
+      }
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;
+    }
+
+    function save() {
+      localStorage.setItem(document.getElementById('filename').value.replace(/\\/gm, "backslash").replace(/"/gm, "double_quote").replace(/'/gm, "single_quote"), input.value.replace(/\\/gm, "backslash").replace(/(\r\n|\n|\r)/gm, "").replace(/"/gm, "double_quote").replace(/'/gm, "single_quote"));
+      document.getElementById('filename').value = '';
+      document.getElementById("Save as").disabled = true;
+      file();
+    }
+
+    function load(x) {
+      document.getElementById('input').value = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
+      document.getElementById("output").innerHTML = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+
+    function file() {
+      var l, i;
+      document.getElementById("output").innerHTML = "";
+      for (i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i) !== 'save') {
+          x = '<button class="filebutton" onclick="load(' + "'" + localStorage.getItem(localStorage.key(i)) + "'" + ')">' + localStorage.key(i).replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'") + '</button><button class="delbutton" onclick="del(' + "'" + localStorage.key(i) + "'" + ')">×</button>';
+          document.getElementById("output").innerHTML += x + "<br>";
+        }
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      }
+    }
+
+    function del(x) {
+      localStorage.removeItem(x);
+      file();
+    }
+
+    function check() {
+      if (document.getElementById('filename').value !== '') {
+        document.getElementById("Save as").disabled = false;
+      } else {
+        document.getElementById("Save as").disabled = true;
+      }
+    }
+  </script>
+
+  <!-- Editor style-->
+  <style>
+    body {
+      text-align: left;
+    }
+
+    .input {
+      float: bottom;
+      background-color: black;
+      color: white;
+      width: 15%;
+      height: 95.5%;
+      overflow: auto;
+    }
+
+    .output {
+      background-color: #1A1A33;
+      float: right;
+      width: 84%;
+      height: 100%;
+      text-align: left;
+      overflow: auto;
+    }
+
+    .filename {
+      background-color: white;
+      width: 7%;
+      float: left;
+      color: #1A1A33;
+    }
+
+    .Save_as {
+      background-color: #1A1A33;
+      width: 8%;
+      float: left;
+      color: white;
+    }
+
+    .Loadbutton {
+      background-color: #1A1A33;
+      width: 15%;
+      float: bottom;
+      color: white;
+    }
+
+    .filebutton {
+      background-color: #1A1A33;
+      width: 30%;
+      height: 2%;
+      float: left;
+      color: white;
+    }
+
+    .delbutton {
+      background-color: darkred;
+      width: 1.5%;
+      height: 2.5%;
+      text-align: left;
+      float: top;
+      color: white;
+    }
+  </style>
+</body>
+</html>
