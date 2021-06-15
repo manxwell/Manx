@@ -15,15 +15,20 @@
   <div class="output" id="output"></div>
   <button class="Loadbutton" onclick="file()">Load</button>
   <button id="Save as" class="Save_as" onclick="save()">Save as</button>
+  <button id="Save as2" class="Save_as" onclick="save2(document.getElementById('filename').value+'.html',setting+document.getElementById('input').value)">Download html</button>
 
   <input class="filename" id="filename" onkeyup="check()">
   <textarea class="input" id="input" onkeyup="main()"></textarea>
 
   <!-- Editor fuctions -->
   <script>
+
+var setting = '<!-- Set color --><body style="background-color: #1A1A33" text="white" link="lightblue" vlink="white" alink="grey"><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [ [\'$\',\'$\'], ["\\(","\\)"] ],processEscapes: true}});<\/script><script type="text/javascript" charset="utf-8" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>';
+
     document.getElementById('input').value = localStorage.getItem("save");
     document.getElementById("output").innerHTML = localStorage.getItem("save");
     document.getElementById("Save as").disabled = true;
+    document.getElementById("Save as2").disabled = true;
     if (localStorage.getItem("save") == null) {
       localStorage.setItem("save", '');
     }
@@ -35,7 +40,7 @@
       }
       MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
       setTimeout(function(){
-      document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;}, 400);
+      document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;}, 1000);
     }
 
     function save() {
@@ -44,6 +49,16 @@
       document.getElementById("Save as").disabled = true;
       file();
     }
+
+function save2(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+  element.style.display = 'none';
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+}
 
     function load(x) {
       document.getElementById('input').value = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
@@ -71,8 +86,10 @@
     function check() {
       if (document.getElementById('filename').value !== '') {
         document.getElementById("Save as").disabled = false;
+        document.getElementById("Save as2").disabled = false;
       } else {
         document.getElementById("Save as").disabled = true;
+        document.getElementById("Save as2").disabled = true;
       }
     }
   </script>
@@ -103,14 +120,14 @@
 
     .filename {
       background-color: white;
-      width: 7%;
+      width: 15%;
       float: left;
       color: #1A1A33;
     }
 
     .Save_as {
       background-color: #1A1A33;
-      width: 8%;
+      width: 7.5%;
       float: left;
       color: white;
     }
