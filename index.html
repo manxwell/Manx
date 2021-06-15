@@ -1,160 +1,82 @@
-<html>
-<!-- Set title and colors -->
-<title>Mathjax Editor</title>
-
-<body style="background-color: black" text="white" link="lightblue" vlink="white" alink="grey">
-
-  <!-- mathjax config -->
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [ ['$','$'], ["\\(","\\)"] ],processEscapes: true}});
-  </script>
-  <script type="text/javascript" charset="utf-8" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  </script>
-
-  <!-- input/output area and buttons -->
-  <div class="output" id="output"></div>
-  <button class="Loadbutton" onclick="file()">Load</button>
-  <button id="Save as" class="Save_as" onclick="save()">Save as</button>
-  <button id="Save as2" class="Save_as" onclick="save2(document.getElementById('filename').value+'.html',setting+document.getElementById('input').value)">Download html</button>
-
-  <input class="filename" id="filename" onkeyup="check()">
-  <textarea class="input" id="input" onkeyup="main()"></textarea>
-
-  <!-- Editor fuctions -->
-  <script>
-
-var setting = '<!-- Set color --><body style="background-color: #1A1A33" text="white" link="lightblue" vlink="white" alink="grey"><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [ [\'$\',\'$\'], ["\\\\(","\\\\)"] ],processEscapes: true}});<\/script><script type="text/javascript" charset="utf-8" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>';
-
-    document.getElementById('input').value = localStorage.getItem("save");
-    document.getElementById("output").innerHTML = localStorage.getItem("save");
-    document.getElementById("Save as").disabled = true;
-    document.getElementById("Save as2").disabled = true;
-    if (localStorage.getItem("save") == null) {
-      localStorage.setItem("save", '');
-    }
-
-    function main() {
-      if (document.getElementById("input").value.replace(/\\/gm, "backslash") !== localStorage.getItem("save").replace(/\\/gm, "backslash")) {
-        localStorage.setItem("save", document.getElementById("input").value);
-        document.getElementById("output").innerHTML = localStorage.getItem("save");
-      }
-      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-      setTimeout(function(){
-      document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;}, 1000);
-    }
-
-    function save() {
-      localStorage.setItem(document.getElementById('filename').value.replace(/\\/gm, "backslash").replace(/"/gm, "double_quote").replace(/'/gm, "single_quote"), input.value.replace(/\\/gm, "backslash").replace(/(\r\n|\n|\r)/gm, "").replace(/"/gm, "double_quote").replace(/'/gm, "single_quote"));
-      document.getElementById('filename').value = '';
-      document.getElementById("Save as").disabled = true;
-      file();
-    }
-
-function save2(filename, text) {
-  var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-  element.setAttribute('download', filename);
-  element.style.display = 'none';
-  document.body.appendChild(element);
-  element.click();
-  document.body.removeChild(element);
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
 }
 
-    function load(x) {
-      document.getElementById('input').value = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
-      document.getElementById("output").innerHTML = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
-      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-    }
+.navbar {
+  overflow: hidden;
+  background-color: black; 
+}
 
-    function file() {
-      var l, i;
-      document.getElementById("output").innerHTML = "";
-      for (i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) !== 'save') {
-          x = '<button class="filebutton" onclick="load(' + "'" + localStorage.getItem(localStorage.key(i)) + "'" + ')">' + localStorage.key(i).replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'") + '</button><button class="delbutton" onclick="del(' + "'" + localStorage.key(i) + "'" + ')">×</button>';
-          document.getElementById("output").innerHTML += x + "<br>";
-        }
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-      }
-    }
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
 
-    function del(x) {
-      localStorage.removeItem(x);
-      file();
-    }
+.subnav {
+  float: left;
+  overflow: hidden;
+}
 
-    function check() {
-      if (document.getElementById('filename').value !== '') {
-        document.getElementById("Save as").disabled = false;
-        document.getElementById("Save as2").disabled = false;
-      } else {
-        document.getElementById("Save as").disabled = true;
-        document.getElementById("Save as2").disabled = true;
-      }
-    }
-  </script>
+.subnav .subnavbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
 
-  <!-- Editor style-->
-  <style>
-    body {
-      text-align: left;
-    }
+.navbar a:hover, .subnav:hover .subnavbtn {
+  background-color: black;
+}
 
-    .input {
-      float: bottom;
-      background-color: black;
-      color: white;
-      width: 15%;
-      height: 91.3%;
-      overflow: auto;
-    }
+.subnav-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color: black;
+  width: 100%;
+  z-index: 1;
+}
 
-    .output {
-      background-color: #1A1A33;
-      float: right;
-      width: 84%;
-      height: 98%;
-      text-align: left;
-      overflow: auto;
-    }
+.subnav-content a {
+  float: left;
+  color: white;
+  text-decoration: none;
+}
 
-    .filename {
-      background-color: white;
-      width: 15%;
-      float: left;
-      color: #1A1A33;
-    }
+.subnav-content a:hover {
+  background-color: white;
+  color: black;
+}
 
-    .Save_as {
-      background-color: #1A1A33;
-      width: 7.5%;
-      float: left;
-      color: white;
-    }
+.subnav:hover .subnav-content {
+  display: block;
+}
+</style>
 
-    .Loadbutton {
-      background-color: #1A1A33;
-      width: 15%;
-      float: bottom;
-      color: white;
-    }
+<div class="navbar">
+  <a href="index.html">Home</a>
+  <a href="Mathjax Editor.html">Mathjax Editor</a>
+  <div class="subnav">
+    <button class="subnavbtn">Links <i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="#Link1">Link 1</a>
+      <a href="#link2">Link 2</a>
+      <a href="#link3">Link 3</a>
+      <a href="#link4">Link 4</a>
+    </div>
+  </div>
+</div>
 
-    .filebutton {
-      background-color: #1A1A33;
-      width: 30%;
-      height: 2%;
-      float: left;
-      color: white;
-    }
-
-    .delbutton {
-      background-color: darkred;
-      width: 1.5%;
-      height: 2.5%;
-      text-align: left;
-      float: top;
-      color: white;
-    }
-  </style>
-</body>
-</html>
+<style>.video-container {    position: relative;    padding-bottom: 56.25%; /* 16:9 */    height: 0;}.video-container iframe {    position: absolute;    top: 0;    left: 0;    width: 100%;    height: 100%;}.iframe {    position: absolute;    top: 0;    left: 0;    width: 100%;    height: 100%;}</style><div class="video-container"><iframe width="1280" height="720" src="https://www.youtube.com/embed/2AmCzJSv1Iw?list=PLBBu3Lqn5XGxsaiIukB--5voAULt_zF1K&controls=0&autoplay=1&mute=0&loop=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
