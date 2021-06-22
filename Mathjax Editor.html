@@ -1,0 +1,298 @@
+<div class="navbar">
+  <a href="https://www.overleaf.com/"target="_blank">Overleaf</a>
+  <button id="search" class="search" onclick="window.open('https://libgen.is/search.php?req='+document.getElementById('input2').value+'&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def','_blank');">
+
+Library Genesis Search</button>
+  <textarea class="input2" id="input2" onkeyup="check2()"></textarea>
+</div>
+
+<div class="navbar2">
+  <a href="index.html">Home</a>
+</div>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: black; 
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.subnav {
+  float: left;
+  overflow: hidden;
+}
+
+.subnav .subnavbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .subnav:hover .subnavbtn {
+  background-color: white;
+  color: black;
+}
+
+.subnav-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color:black;
+  width: 100%;
+  z-index: 1;
+}
+
+.subnav-content a {
+  float: left;
+  color: white;
+  text-decoration: none;
+}
+
+.subnav-content a:hover {
+  background-color: white;
+  color: black;
+}
+
+.subnav:hover .subnav-content {
+  display: block;
+}
+</style>
+
+<html>
+<!-- Set title and colors -->
+<title>Mathjax Editor</title>
+
+<body style="background-color: black" text="white" link="lightblue" vlink="white" alink="grey">
+
+  <!-- mathjax config -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [ ['$','$'], ["\\(","\\)"] ],processEscapes: true}});
+  </script>
+  <script type="text/javascript" charset="utf-8" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+  <!-- input/output area and buttons -->
+  <div class="output" id="output"></div>
+  <button class="Loadbutton" onclick="file()">Load</button>
+  <button id="Save as" class="Save_as" onclick="save()">Save</button>
+  <button id="Save as2" class="Save_as" onclick="save2(document.getElementById('filename').value+'.html',setting+document.getElementById('input').value)">Download</button>
+
+  <input class="filename" id="filename" onkeyup="check()">
+  <textarea class="input" id="input" onkeyup="main()"></textarea>
+
+  <!-- Editor fuctions -->
+  <script>
+
+var setting = '<!-- Set color --><body style="background-color: #1A1A33" text="white" link="lightblue" vlink="white" alink="grey"><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [ [\'$\',\'$\'], ["\\\\(","\\\\)"] ],processEscapes: true}});<\/script><script type="text/javascript" charset="utf-8" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>';
+
+    document.getElementById('input').value = localStorage.getItem("save");
+    document.getElementById("output").innerHTML = localStorage.getItem("save");
+    document.getElementById("Save as").disabled = true;
+    document.getElementById("Save as2").disabled = true;
+    document.getElementById("search").disabled = true;
+    if (localStorage.getItem("save") == null) {
+      localStorage.setItem("save", '');
+    }
+
+    function main() {
+      if (document.getElementById("input").value.replace(/\\/gm, "backslash") !== localStorage.getItem("save").replace(/\\/gm, "backslash")) {
+        localStorage.setItem("save", document.getElementById("input").value);
+        document.getElementById("output").innerHTML = localStorage.getItem("save");
+      }
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      setTimeout(function(){
+      document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;}, 1000);
+    }
+
+function check2() {
+      if (document.getElementById('input2').value.length >1) {
+        document.getElementById("search").disabled = false;
+      } else {
+        document.getElementById("search").disabled = true;
+      }
+}
+
+    function save() {
+      localStorage.setItem(document.getElementById('filename').value.replace(/\\/gm, "backslash").replace(/"/gm, "double_quote").replace(/'/gm, "single_quote"), input.value.replace(/\\/gm, "backslash").replace(/(\r\n|\n|\r)/gm, "").replace(/"/gm, "double_quote").replace(/'/gm, "single_quote"));
+      document.getElementById('filename').value = '';
+      document.getElementById("Save as").disabled = true;
+      file();
+    }
+
+function save2(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+  element.style.display = 'none';
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+}
+
+    function load(x) {
+      document.getElementById('input').value = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
+      document.getElementById("output").innerHTML = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+
+    function file() {
+      var l, i;
+      document.getElementById("output").innerHTML = "";
+      for (i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i) !== 'save') {
+          x = '<button class="filebutton" onclick="load(' + "'" + localStorage.getItem(localStorage.key(i)) + "'" + ')">' + localStorage.key(i).replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'") + '</button><button class="delbutton" onclick="del(' + "'" + localStorage.key(i) + "'" + ')">×</button>';
+          document.getElementById("output").innerHTML += x + "<br>";
+        }
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      }
+    }
+
+    function del(x) {
+      localStorage.removeItem(x);
+      file();
+    }
+
+    function check() {
+      if (document.getElementById('filename').value !== '') {
+        document.getElementById("Save as").disabled = false;
+        document.getElementById("Save as2").disabled = false;
+      } else {
+        document.getElementById("Save as").disabled = true;
+        document.getElementById("Save as2").disabled = true;
+      }
+    }
+  </script>
+
+  <!-- Editor style-->
+  <style>
+    body {
+      text-align: left;
+    }
+
+    .input {
+      float: bottom;
+      background-color: black;
+      color: white;
+      width: 15%;
+      height: 77.5%;
+      overflow: auto;
+    }
+
+    .output {
+      background-color: #1A1A33;
+      float: right;
+      width: 84%;
+      height: 89.5%;
+      text-align: left;
+      overflow: auto;
+    }
+
+    .filename {
+      background-color: white;
+      width: 15%;
+      float: left;
+      color: #1A1A33;
+    }
+
+    .Save_as {
+      background-color: #1A1A33;
+      width: 7.5%;
+      height: 5%;
+      float: left;
+      color: white;
+    }
+
+    .Loadbutton {
+      background-color: #1A1A33;
+      width: 15%;
+      height: 5%;
+      float: bottom;
+      color: white;
+    }
+
+    .filebutton {
+      background-color: #1A1A33;
+      width: 30%;
+      height: 2%;
+      float: left;
+      color: white;
+    }
+
+    .delbutton {
+      background-color: darkred;
+      width: 1.5%;
+      height: 2.5%;
+      text-align: left;
+      float: top;
+      color: white;
+    }
+
+.navbar2 {
+  overflow: hidden;
+  background-color: black; 
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.navbar2 a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navbar2 a:hover {
+  background: #ddd;
+  color: black;
+}
+body {
+  background-image: url('pic.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-size: 100% 100%;
+}
+.input2 {
+      float: right;
+      background-color: black;
+      color: white;
+      width: 10%;
+      height:5% ;
+      float: bottom;
+    }
+.search{
+  float: right;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  background-color: black; 
+}
+  </style>
+</body>
+</html>
+

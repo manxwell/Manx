@@ -1,13 +1,22 @@
-<title>Home</title>
+<title>Course</title>
 
 <div class="navbar">
+  <div class="subnav">
+    <button class="subnavbtn">Ethics in Ancient Philosophy<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a onclick="document.getElementById('pdf').src = 'Plato, Euthyphro.pdf';">Plato, Euthyphro</a>
+      <a onclick="document.getElementById('pdf').src = 'Plato, The Republic.pdf';">Plato, The Republic</a>
+    </div>
+  </div>
   <button id="search" class="search" onclick="window.open('https://libgen.is/search.php?req='+document.getElementById('input2').value+'&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def','_blank');">
     Library Genesis Search</button>
   <textarea class="input2" id="input2" onkeyup="check2()"></textarea>
 </div>
 
+<iframe id="pdf" src="Classics of moral and political theory by Morgan, Michael L.pdf" style="width:100%; height:100%;" frameborder="0"></iframe>
+
 <div class="navbar2">
-  <a href="Mathjax Editor.html">Editor</a>
+  <a href="index.html">Home</a>
   <a href="Course.html">Course</a>
 </div>
 
@@ -22,7 +31,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  <script>
-document.getElementById("search").disabled = true;
+   document.getElementById("search").disabled = true;
 
 function check2() {
       if (document.getElementById('input2').value.length >1) {
