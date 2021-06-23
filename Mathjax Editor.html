@@ -137,7 +137,7 @@ function check2() {
       localStorage.setItem(document.getElementById('filename').value.replace(/\\/gm, "backslash").replace(/"/gm, "double_quote").replace(/'/gm, "single_quote"), input.value.replace(/\\/gm, "backslash").replace(/(\r\n|\n|\r)/gm, "").replace(/"/gm, "double_quote").replace(/'/gm, "single_quote"));
       document.getElementById('filename').value = '';
       document.getElementById("Save as").disabled = true;
-      document.getElementById("Save as").disabled = false;
+      document.getElementById("Save as2").disabled = true;
       file();
     }
 
@@ -149,6 +149,9 @@ function save2(filename, text) {
   document.body.appendChild(element);
   element.click();
   document.body.removeChild(element);
+  document.getElementById('filename').value = '';
+  document.getElementById("Save as").disabled = true;
+  document.getElementById("Save as2").disabled = true;
 }
 
     function load(x) {
