@@ -1,15 +1,25 @@
 <title>Book</title>
 
 <div class="navbar">
-  <div class="subnav">
+
+    <div class="subnav">
+    <button class="subnavbtn">Search<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+  <button id="search2" class="search" onclick="document.getElementById('frame').src = 'https://archive.org/search.php?query='+document.getElementById('input2').value;">
+    Internet Archive</button>
+      <button id="search" class="search" onclick="document.getElementById('frame').src = 'https://libgen.is/search.php?req='+document.getElementById('input2').value+'&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def';">
+    Library Genesis</button>
+    </div>
+  </div>
+
+  <textarea class="input2" id="input2" onkeyup="check2()"></textarea>
+
+  <div class="subnav2">
     <button class="subnavbtn">Philosophy<i class="fa fa-caret-down"></i></button>
     <div class="subnav-content">
       <a href="Logic/Logic.html">Logic</a>
     </div>
   </div>
-  <button id="search" class="search" onclick="document.getElementById('frame').src = 'https://archive.org/search.php?query='+document.getElementById('input2').value;">
-    Internet Archive Search</button>
-  <textarea class="input2" id="input2" onkeyup="check2()"></textarea>
 </div>
 
 <iframe id="frame" src="https://www.youtube.com/embed/xnK4VitU2hU?autoplay=1" style="width:100%; height:90%;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>
@@ -30,12 +40,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  <script>
 document.getElementById("search").disabled = true;
+document.getElementById("search2").disabled = true;
 
 function check2() {
       if (document.getElementById('input2').value.length >1) {
         document.getElementById("search").disabled = false;
+        document.getElementById("search2").disabled = false;
       } else {
         document.getElementById("search").disabled = true;
+        document.getElementById("search2").disabled = true;
       }
 }
   </script>
@@ -69,12 +82,18 @@ body {
   background-color: black; 
 }
 
-.subnav {
-  float: left;
-  overflow: hidden;
+.subnav .subnavbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
 }
 
-.subnav .subnavbtn {
+.subnav2 .subnavbtn {
   font-size: 16px;  
   border: none;
   outline: none;
@@ -90,6 +109,11 @@ body {
   color: black;
 }
 
+.navbar a:hover, .subnav2:hover .subnavbtn {
+  background-color: white;
+  color: black;
+}
+
 .subnav-content {
   display: none;
   position: absolute;
@@ -99,7 +123,32 @@ body {
   z-index: 1;
 }
 
+.subnav2-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color:black;
+  width: 100%;
+  z-index: 1;
+}
+
+.subnav {
+  float: right;
+  overflow: hidden;
+}
+
+.subnav2 {
+  float: left;
+  overflow: hidden;
+}
+
 .subnav-content a {
+  float: left;
+  color: white;
+  text-decoration: none;
+}
+
+.subnav2-content a {
   float: left;
   color: white;
   text-decoration: none;
@@ -110,7 +159,16 @@ body {
   color: black;
 }
 
+.subnav2-content a:hover {
+  background-color: white;
+  color: black;
+}
+
 .subnav:hover .subnav-content {
+  display: block;
+}
+
+.subnav2:hover .subnav-content {
   display: block;
 }
 
