@@ -5,10 +5,14 @@
     <div class="subnav">
     <button class="subnavbtn">Search<i class="fa fa-caret-down"></i></button>
     <div class="subnav-content">
-  <button id="search2" class="search" onclick="document.getElementById('frame').src = 'https://archive.org/search.php?query='+document.getElementById('input2').value;">
+  <button id="search1" class="search" onclick="document.getElementById('frame').src = 'https://archive.org/search.php?query='+document.getElementById('input2').value;">
     Internet Archive</button>
-      <button id="search" class="search" onclick="document.getElementById('frame').src = 'https://libgen.is/search.php?req='+document.getElementById('input2').value+'&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def';">
+      <button id="search2" class="search" onclick="document.getElementById('frame').src = 'https://www.gutenberg.org/ebooks/search/?query='+document.getElementById('input2').value+'&submit_search=Go%21';">
+    Project Gutenberg</button>
+      <button id="search3" class="search" onclick="document.getElementById('frame').src = 'https://libgen.is/search.php?req='+document.getElementById('input2').value+'&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def';">
     Library Genesis</button>
+      <button id="search4" class="search" onclick="document.getElementById('frame').src = 'https://librivox.org/search?q='+document.getElementById('input2').value+'&search_form=advanced';">
+    Librivox</button>
     </div>
   </div>
 
@@ -39,16 +43,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  <script>
-document.getElementById("search").disabled = true;
+document.getElementById("search1").disabled = true;
 document.getElementById("search2").disabled = true;
+document.getElementById("search3").disabled = true;
+document.getElementById("search4").disabled = true;
 
 function check2() {
       if (document.getElementById('input2').value.length >1) {
-        document.getElementById("search").disabled = false;
+        document.getElementById("search1").disabled = false;
         document.getElementById("search2").disabled = false;
+        document.getElementById("search3").disabled = false;
+        document.getElementById("search4").disabled = false;
       } else {
-        document.getElementById("search").disabled = true;
+        document.getElementById("search1").disabled = true;
         document.getElementById("search2").disabled = true;
+        document.getElementById("search3").disabled = true;
+        document.getElementById("search4").disabled = true;
       }
 }
   </script>
