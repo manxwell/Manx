@@ -1,9 +1,5 @@
 <div class="navbar">
   <a href="https://www.overleaf.com/"target="_blank">Overleaf</a>
-  <button id="search" class="search" onclick="window.open('https://libgen.is/search.php?req='+document.getElementById('input2').value+'&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def','_blank');">
-
-Library Genesis Search</button>
-  <textarea class="input2" id="input2" onkeyup="check2()"></textarea>
 </div>
 
 <div class="navbar2">
@@ -110,7 +106,6 @@ var setting = '<!-- Set color --><body style="background-color: #1A1A33" text="w
     document.getElementById("output").innerHTML = localStorage.getItem("save");
     document.getElementById("Save as").disabled = true;
     document.getElementById("Save as2").disabled = true;
-    document.getElementById("search").disabled = true;
     if (localStorage.getItem("save") == null) {
       localStorage.setItem("save", '');
     }
@@ -124,14 +119,6 @@ var setting = '<!-- Set color --><body style="background-color: #1A1A33" text="w
       setTimeout(function(){
       document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;}, 1000);
     }
-
-function check2() {
-      if (document.getElementById('input2').value.length >1) {
-        document.getElementById("search").disabled = false;
-      } else {
-        document.getElementById("search").disabled = true;
-      }
-}
 
     function save() {
       localStorage.setItem(document.getElementById('filename').value.replace(/\\/gm, "backslash").replace(/"/gm, "double_quote").replace(/'/gm, "single_quote"), input.value.replace(/\\/gm, "backslash").replace(/(\r\n|\n|\r)/gm, "").replace(/"/gm, "double_quote").replace(/'/gm, "single_quote"));
