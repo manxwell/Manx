@@ -8,7 +8,7 @@
 <iframe id="frame" src="background.html" style="width:100%; height:90.2%;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>
 
 <div class="navbar2">
-      <a onclick="document.getElementById('frame').src = 'https://www.youtube.com/embed/Mu3BfD6wmPg?list=PL6NdkXsPL07IOu1AZ2Y2lGNYfjDStyT6O&autoplay=1&controls=0&loop=1';">Music</a>
+      <a onclick=if(document.getElementById('frame').src == "background.html"){"document.getElementById('frame').src = 'https://www.youtube.com/embed/Mu3BfD6wmPg?list=PL6NdkXsPL07IOu1AZ2Y2lGNYfjDStyT6O&autoplay=1&controls=0&loop=1';"}else{document.getElementById('frame').src = "background.html"}>Music</a>
 </div>
 
   <!-- mathjax config -->
