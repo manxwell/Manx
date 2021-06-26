@@ -90,6 +90,7 @@ body {
 
   <!-- input/output area and buttons -->
   <div class="output" id="output"></div>
+  <button class="Loadbutton" onclick="tran()">Translate</button>
   <button class="Loadbutton" onclick="file()">Load</button>
   <button id="Save as" class="Save_as" onclick="save()">Save</button>
   <button id="Save as2" class="Save_as" onclick="save2(document.getElementById('filename').value+'.html',setting+document.getElementById('input').value)">Download</button>
@@ -141,6 +142,11 @@ function save2(filename, text) {
   document.getElementById("Save as2").disabled = true;
 }
 
+function tran() {
+  myWindow = window.open("translate.html", "_blank", "width=10, height=10");
+  document.getElementById("input").value=localStorage.getItem("save")
+}
+
     function load(x) {
       document.getElementById('input').value = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
       document.getElementById("output").innerHTML = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
@@ -186,7 +192,7 @@ function save2(filename, text) {
       background-color: black;
       color: white;
       width: 15%;
-      height: 78%;
+      height: 73%;
       overflow: auto;
     }
 
@@ -215,6 +221,14 @@ function save2(filename, text) {
       width: 7.5%;
       height: 5%;
       float: left;
+      color: white;
+    }
+
+    .Translate {
+      background-color: black;
+      width: 15%;
+      height: 5%;
+      float: bottom;
       color: white;
     }
 
