@@ -1,3 +1,5 @@
+<title>Editor</title>
+
 <div class="navbar">
   <a href="https://www.overleaf.com/"target="_blank">Overleaf</a>
 </div>
@@ -76,8 +78,7 @@ body {
 </style>
 
 <html>
-<!-- Set title and colors -->
-<title>Mathjax Editor</title>
+<!--Set colors -->
 
 <body style="background-color: black" text="white" link="lightblue" vlink="white" alink="grey">
 
@@ -145,7 +146,7 @@ function save2(filename, text) {
 function tran() {
   myWindow = window.open("translate.html", "_blank", "width=10, height=10");
   document.getElementById("input").value=localStorage.getItem("save");
-  setTimeout(function(){localStorage.setItem("save", location.reload();}, 5000);
+  setTimeout(function(){location.reload();, 5000);
 }
 
     function load(x) {
