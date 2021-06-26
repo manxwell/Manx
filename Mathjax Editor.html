@@ -1,4 +1,4 @@
-<title>Note Editor</title>
+<title>Editor</title>
 
 <div class="navbar">
   <a href="https://www.overleaf.com/"target="_blank">Overleaf</a>
@@ -144,7 +144,7 @@ function save2(filename, text) {
 }
 
 function tran() {
-  Window = window.open("translate.html", "_blank","width=0,height=0");
+  Window = window.open("translate.html", "_blank","fs","fullscreen=yes");
   document.getElementById("input").value=localStorage.getItem("save");
   setTimeout(function(){localStorage.setItem("save", document.getElementById("input").value);document.getElementById("output").innerHTML = localStorage.getItem("save");Window.close();}, 3000);
 }
