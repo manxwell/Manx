@@ -23,7 +23,7 @@ for (let i = 0; i < list.length; i++) {
   w+=1;
   document.write('<p class=notranslate id='+n.toString()+'></p>');
   document.getElementById(n.toString()).innerText='<p title="';
-  document.write('<p class="notranslate">'+list[i]+'.</p>');
+  document.write('<p class="notranslate">'+list[i].replace(/"/gm, "")+'.</p>');
   document.write('<p class=notranslate id='+m.toString()+'></p>');
   document.getElementById(m.toString()).innerText='">';
   document.write('<p class="translate">'+list[i]+'。</p>');
