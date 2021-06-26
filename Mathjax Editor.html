@@ -145,7 +145,7 @@ function save2(filename, text) {
 function tran() {
   myWindow = window.open("translate.html", "_blank", "width=10, height=10");
   document.getElementById("input").value=localStorage.getItem("save")
-  setTimeout(function(){localStorage.setItem("save", document.documentElement.innerText);}, 5000);
+  setTimeout(function(){localStorage.setItem("save", reload();}, 5000);
 }
 
     function load(x) {
