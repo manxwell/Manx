@@ -1,3 +1,5 @@
+
+<title>Editor</title>
 <div id="google_translate_element"></div>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script type="text/javascript">
@@ -16,12 +18,12 @@ var n=0;
 var m=list.length;
 var w=2*list.length;
 document.write('<div class=box><p class=notranslate id="start"></p>');
-document.getElementById("start").innerText='<div class=box>';
+document.getElementById("start").innerText='<br><br><br><br><div class=box>';
 for (let i = 0; i < list.length; i++) {
   n+=1;
   m+=1;
   w+=1;
-  document.write('<br><br><br><br><p class=notranslate id='+n.toString()+'></p>');
+  document.write('<p class=notranslate id='+n.toString()+'></p>');
   document.getElementById(n.toString()).innerText='<p title="';
   document.write('<p class="notranslate">'+list[i].replace(/"/gm, "'")+'.</p>');
   document.write('<p class=notranslate id='+m.toString()+'></p>');
