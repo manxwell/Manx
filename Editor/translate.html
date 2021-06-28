@@ -17,7 +17,7 @@ var n=0;
 var m=list.length;
 var w=2*list.length;
 document.write('<div class=box><p class=notranslate id="start"></p>');
-document.getElementById("start").innerText='<br><br><br><br><div class=box>';
+document.getElementById("start").innerText='';
 for (let i = 0; i < list.length; i++) {
   n+=1;
   m+=1;
@@ -32,7 +32,7 @@ for (let i = 0; i < list.length; i++) {
   document.getElementById(w.toString()).innerText='</p>';
 }
 document.write('<div class=box><p class=notranslate id="end"></p>');
-document.getElementById("end").innerText='</div>~';
+document.getElementById("end").innerText='~';
 document.body.style.zoom="3%"
 setTimeout(function(){window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });}, 500);
 setTimeout(function(){window.scrollTo({top: 0, behavior: 'smooth'});}, 1500);
