@@ -1,4 +1,4 @@
-<title>Mathjax Editor</title>
+<title>Editor</title>
 
 <div class="navbar">
   <a href="https://www.overleaf.com/"target="_blank">Overleaf</a>
@@ -146,7 +146,7 @@ function save2(filename, text) {
 function tran() {
   localStorage.setItem("save2",document.getElementById('filename'))
   Window = window.open("translate.html","fullscreen=yes");
-  setTimeout(function(){document.getElementById("input").value+=localStorage.getItem("save2");location.reload();Window.close();}, 3000);
+  setTimeout(function(){localStorage.setItem("save",localStorage.getItem("save")+localStorage.getItem("save2"));location.reload();Window.close();}, 3000);
 }
 
     function load(x) {
