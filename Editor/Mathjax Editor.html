@@ -148,8 +148,9 @@ function tran() {
   Window = window.open("translate.html","fullscreen=yes");
   setTimeout(function(){localStorage.setItem("save",localStorage.getItem("save")+localStorage.getItem("save2"));
                         location.reload();
-                        Window.close();}, 3000);
-  localStorage.removeItem("save2");
+                        Window.close();
+                        localStorage.removeItem("save2");
+                       }, 3000);
 }
 
     function load(x) {
