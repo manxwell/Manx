@@ -91,10 +91,10 @@ body {
 
   <!-- input/output area and buttons -->
   <div class="output" id="output"></div>
-  <button class="Loadbutton" onclick="tran()">Translate</button>
   <button class="Loadbutton" onclick="file()">Load</button>
   <button id="Save as" class="Save_as" onclick="save()">Save</button>
   <button id="Save as2" class="Save_as" onclick="save2(document.getElementById('filename').value+'.html',setting+document.getElementById('input').value)">Download</button>
+  <button class="Loadbutton" id="Translate" onclick="tran()">Translate</button>
 
   <input class="filename" id="filename" onkeyup="check()">
   <textarea class="input" id="input" onkeyup="main()"></textarea>
@@ -108,6 +108,7 @@ var setting = '<!-- Set color --><body text="white" link="lightblue" vlink="whit
     document.getElementById("output").innerHTML = localStorage.getItem("save");
     document.getElementById("Save as").disabled = true;
     document.getElementById("Save as2").disabled = true;
+    document.getElementById("Translate").disabled = true;
     if (localStorage.getItem("save") == null) {
       localStorage.setItem("save", '');
     }
@@ -180,9 +181,11 @@ function tran() {
       if (document.getElementById('filename').value !== '') {
         document.getElementById("Save as").disabled = false;
         document.getElementById("Save as2").disabled = false;
+        document.getElementById("Translate").disabled = false;
       } else {
         document.getElementById("Save as").disabled = true;
         document.getElementById("Save as2").disabled = true;
+        document.getElementById("Translate").disabled = true;
       }
     }
   </script>
