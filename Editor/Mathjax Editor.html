@@ -1,4 +1,4 @@
-<title>Mathjax Editor</title>
+<title>Editor</title>
 
 <div class="navbar2">
   <a href="/Home/index.html">Home</a>
@@ -107,7 +107,7 @@ function Tikz() {
 
     function load(x) {
       document.getElementById('input').value = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
-      localStorage.setItem("save",.getElementById('input').value);
+      localStorage.setItem("save",document.getElementById('input').value);
       document.getElementById("output").innerHTML = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
       MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     }
