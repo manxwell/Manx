@@ -1,4 +1,4 @@
-<title>Editor</title>
+<title>Mathjax Editor</title>
 
 <div class="navbar2">
   <a href="/Home/index.html">Home</a>
@@ -91,7 +91,7 @@ function save2(filename, text) {
 }
 
 function tran() {
-  localStorage.setItem("save2",document.getElementById('filename').value)
+  localStorage.setItem("save2",document.getElementById('filename').value);
   Window = window.open("translate.html","fullscreen=yes");
   setTimeout(function(){localStorage.setItem("save",localStorage.getItem("save")+localStorage.getItem("save2"));
                         location.reload();
@@ -107,6 +107,7 @@ function Tikz() {
 
     function load(x) {
       document.getElementById('input').value = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
+      localStorage.setItem("save",.getElementById('input').value);
       document.getElementById("output").innerHTML = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
       MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     }
