@@ -14,6 +14,7 @@
   <button id="Save as" class="button" onclick="save()">Save</button>
     </div>
   </div>
+
     <input class="input2" id="filename" onkeyup="check()">
 
   <div class="subnav2">
@@ -47,7 +48,7 @@
   <script>
 
 var setting = '<!-- Set color --><body text="white" link="lightblue" vlink="white" alink="grey"><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [ [\'$\',\'$\'], ["\\\\(","\\\\)"] ],processEscapes: true}});<\/script><script type="text/javascript" charset="utf-8" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script><style>.box {  background-color:black;opacity: 0.92;  color:white;  padding: 1cm 1cm 1cm 1cm; border: 5px ;  border-right-width: thin;border-bottom-width: thin; width:75%;  margin-left: 10%;  margin-bottom:20px;}</style><style>body {  background-image: url("https://i.stack.imgur.com/UJsHk.jpg");  background-repeat: no-repeat;  background-attachment: fixed;   background-size: 100% 100%;}</style><link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css"><script src="https://tikzjax.com/v1/tikzjax.js"><\/script>';
-    reload();
+
     document.getElementById('input').value = localStorage.getItem("save");
     document.getElementById("output").innerHTML = localStorage.getItem("save");
     document.getElementById("Save as").disabled = true;
@@ -91,7 +92,7 @@ function save2(filename, text) {
 }
 
 function tran() {
-  localStorage.setItem("save2",document.getElementById('filename').value);
+  localStorage.setItem("save2",document.getElementById('filename').value)
   Window = window.open("translate.html","fullscreen=yes");
   setTimeout(function(){localStorage.setItem("save",localStorage.getItem("save")+localStorage.getItem("save2"));
                         location.reload();
@@ -107,7 +108,6 @@ function Tikz() {
 
     function load(x) {
       document.getElementById('input').value = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
-      localStorage.setItem("save",document.getElementById('input').value);
       document.getElementById("output").innerHTML = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
       MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     }
