@@ -109,6 +109,7 @@ function Tikz() {
     function load(x) {
       document.getElementById('input').value = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
       document.getElementById("output").innerHTML = x.replace(/backslash/gm, "\\").replace(/double_quote/gm, '"').replace(/single_quote/gm, "'");
+      localStorage.setItem("save", document.getElementById("input").value);
       MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     }
 
