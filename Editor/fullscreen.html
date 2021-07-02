@@ -1,0 +1,24 @@
+<body style="background-color: black" text="white" link="lightblue" vlink="white" alink="grey">
+
+<textarea 
+style="width:14%; height:100%; float: top; 
+background-color: black; color: white;"
+id ="input" onkeyup="show()"></textarea>
+
+<script>
+    if (localStorage.getItem("save") == null) {
+      localStorage.setItem("save", '');
+    }
+    else {document.getElementById('input').value = localStorage.getItem("save");
+    }
+    
+function show(){
+var input = document.getElementById('input').value
+document.getElementById("output").srcdoc = '<body text="white" link="lightblue" vlink="white" alink="grey"><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [ [\'$\',\'$\'], ["\\\\(","\\\\)"] ],processEscapes: true}});<\/script><script type="text/javascript" charset="utf-8" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script><style>.box {  background-color:black;opacity: 0.92;  color:white;  padding: 1cm 1cm 1cm 1cm; border: 5px ;  border-right-width: thin;border-bottom-width: thin; width:75%;  margin-left: 10%;  margin-bottom:20px;}</style><style>body {  background-image: url("https://i.stack.imgur.com/UJsHk.jpg");  background-repeat: no-repeat;  background-attachment: fixed;   background-size: 100% 100%;}</style><link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css"><script src="https://tikzjax.com/v1/tikzjax.js"><\/script>'+input;
+localStorage.setItem("save",document.getElementById("input").value);
+}
+</script>
+
+<iframe 
+style="width:85%; height:99.5%; float: top;"
+id = "output"><iframe>
